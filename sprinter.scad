@@ -12,9 +12,9 @@ ww=8;
 wo=37;
 
 
-cubbie_l=62;
-cubbie_h=14;
-cubbie_w=20;
+cubbie_l=78; //172cm
+cubbie_h=16; //36cm
+cubbie_w=18; //50cm
 //toilet
 tw=15+3/4;
 th=18;
@@ -52,7 +52,7 @@ webl=34.6+1;
 //bed
 beds=55.25;
 bedtotal=166-beds;
-bedl=80;
+bedl=96;
 bedw1=27; //used to be 50
 bedw2=27;
 bedh=0.5;
@@ -325,9 +325,11 @@ es_h=40;
 
 //up storage
 color("green",0.2)  intersection() {
-    translate([ke+18,vw-cubbie_w,vh-cubbie_h]) cube([cubbie_l,cubbie_w,cubbie_h]);
+    translate([ke+bedl-cubbie_l,vw-cubbie_w,vh-cubbie_h]) cube([cubbie_l,cubbie_w,cubbie_h]);
+    
     hull();
 }
+//color("red") translate([ke+bedl-cubbie_l,vw-20,vh-cubbie_h]) cube([cubbie_l,12,cubbie_h]);
 
 //bathroom
 color("blue",0.25) intersection() {
