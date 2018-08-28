@@ -11,6 +11,10 @@ wh=13;
 ww=8;
 wo=37;
 
+
+cubbie_l=62;
+cubbie_h=14;
+cubbie_w=20;
 //toilet
 tw=15+3/4;
 th=18;
@@ -49,8 +53,8 @@ webl=34.6+1;
 beds=55.25;
 bedtotal=166-beds;
 bedl=80;
-bedw1=50;
-bedw2=40;
+bedw1=27; //used to be 50
+bedw2=27;
 bedh=0.5;
 strapl=(bedtotal-bedl)/2;
 strapw=2;
@@ -124,11 +128,13 @@ module tank(l,w,h) {
     translate([ih,0,0]) cube([l,w,h]);
 }
 
+
 module bedleft(bedthick=3) { 
-    intersection() {
+    translate([0,vw/2-bedw1,0]) bedonly(bedthick=bedthick);
+    /*intersection() {
         bedonly(bedthick=bedthick);
         cube([200,bedsplit,bedthick]);
-    }
+    }*/
 }
 module bedright(bedthick=3) {
     translate([0,-bedsplit,wh]) difference() {
@@ -182,6 +188,7 @@ module bedloveseatonly(bedheight=0,bedthick=bedh) {
 
 
 module bedonly(bedheight=0,bedthick=bedh) {
+    bedw2=bedw1;
     bedpoints = [
           [  0,  bedw1-bedw2,  bedheight ],  //0
           [ bedl,  0,  bedheight ],  //1
@@ -318,7 +325,7 @@ es_h=40;
 
 //up storage
 color("green",0.2)  intersection() {
-    translate([ke,vw-30,vh-14]) cube([bedl,30,14]);
+    translate([ke+18,vw-cubbie_w,vh-cubbie_h]) cube([cubbie_l,cubbie_w,cubbie_h]);
     hull();
 }
 
