@@ -61,9 +61,13 @@ seatstrapl=(seattotal-bedl/2)/2;
 seate=seatstrapl+seats+bedl/2;
 
 //shower pan
-sw=18;
-sh=4;
-sl=35;
+//sw=18;
+//sh=4;
+//sl=35;
+//larger shower pan
+sw=48;
+sh=2.75;
+sl=36;
 
 //mattress
 bedsplit=32;
@@ -90,7 +94,7 @@ bl=35;
 
 //kitchen
 kw=25;
-kh=36;
+kh=40;
 kl=32;
 ko=37;
 ks=ko;
@@ -229,7 +233,7 @@ module bedloveseat(bedheight=0,bedthick=bedh) {
 //bedloveseat(bedheight=30);
 
 
-rotate([0,0,$t*360]) translate([-vl/2,-vw/2,0]) {
+//rotate([0,0,$t*360]) translate([-vl/2,-vw/2,0]) {
 
 //beams
 intersection() {
@@ -257,34 +261,60 @@ color("SkyBlue",0.9) translate([70-(gl-fl),vw-gw,fh]) tank(gl,gw,gh);
 translate([0,0,0]) cube([webl,webw,webh]);
 
 //shower pan
-translate([0,vw-tw-sw,0]) cube([sl,sw,sh]);
+translate([0,vw-sw-1,0]) cube([sl,sw,sh]);
 
 //mattress
 
-translate([ke,vw-bedsplit-2,21]) rotate([0,0,0]) translate([0,0,0]) bedleft();
+translate([ke,vw-bedsplit-2,27]) rotate([0,0,0]) translate([0,0,0]) bedleft();
 
 //fridge
-color("orange") translate([vl-fridgel-4,vw-fridgew-5,0]) cube([fridgel,fridgew,fridgeh]);
+//color("orange") translate([vl-fridgel-4,vw-fridgew-5,0]) cube([fridgel,fridgew,fridgeh]);
 
 //projector
-color("red") translate([166-40,vw-pw-24,vh-14-ph]) cube([3.1,pw,0.7]);
+//color("red") translate([166-40,vw-pw-24,vh-14-ph]) cube([3.1,pw,0.7]);
+color("red") translate([166-40,44,vh-14-ph]) cube([3.1,pw,0.7]);
 
 //fold out desk by door
-color("green",0.3) translate([166-57-fol-4,2,40]) rotate([80*(1-foldout),0,0]) cube([fol,fow,0.5]);
+//color("green",0.3) translate([166-57-fol-4,2,40]) rotate([80*(1-foldout),0,0]) cube([fol,fow,0.5]);
 
-bed(bedheight=35);
+//bed(bedheight=35);
 
 //back storage
-color("green",0.2)  intersection() {
+/*color("green",0.2)  intersection() {
     translate([0,0,webh]) cube([wo+wl-16,webw,vh-webh]);
     hull();
-}
+}*/
+
+//Dometic CFX75DZW
+//fridge
+dom_l=19.5;
+dom_h=18.58;
+dom_w=32.7;
+//cfx-65dz
+//dom_h=22;
+//dom_w=28.5;
+//dom_l=17.9;
+//cfx-50w
+//dom_l=17.9;
+//dom_h=18.5;
+//dom_w=28.5;
+
+//dometic fridge 
+color("blue") translate([ko,dom_w-vw/2+4,16]) cube([dom_w,dom_l,dom_h]);
+
+//extra seats
+es_l=30;
+es_w=15;
+es_h=40;
+//color("red") translate([ke+6,0,0]) cube([es_l,es_w,es_h]); //folded
+//color("red") translate([ke+6,0,0]) cube([es_l,es_h,es_w]); //unfolded
+
 
 //side storage
-color("green",0.2)  intersection() {
+/*color("green",0.2)  intersection() {
     translate([ke,vw-30,0]) cube([bedl,30,21]);
     hull();
-}
+}*/
 
 //up storage
 color("green",0.2)  intersection() {
@@ -295,6 +325,34 @@ color("green",0.2)  intersection() {
 //bathroom
 color("blue",0.25) intersection() {
     translate([0,vw-bw,0]) cube([bl,bw,bh]);
+    hull();
+}
+//https://www.amazon.com/Zuhne-Modena-28-Undermount-Stainless/dp/B01AFSJ8I6/ref=pd_cp_60_3?_encoding=UTF8&pd_rd_i=B01JZ7N0IW&pd_rd_r=9GME060D13MWRATM5V4G&pd_rd_w=kLLhS&pd_rd_wg=ROiXU&refRID=9GME060D13MWRATM5V4G&th=1
+//SINK Zuhne Modena Undermount Single Bowl 15 x 17 Inch 16 Gauge Stainless Steel Kitchen Sink, Bar or Prep Kitchen Sinks
+sink_w=15;
+sink_d=17;
+sink_h=10;
+
+//Ruvati 15 x 15 inch Drop-in Topmount Bar Prep Sink 16 Gauge Stainless Steel Single Bowl - RVH8115
+sink_w=15;
+sink_d=15;
+sink_h=9;
+
+//https://www.amazon.com/dp/B0183W4MTQ/ref=psdc_3754691_t1_B0183W4MZK
+//Kraus KHU15 Pax Zero-Radius 14 1/2 18 Gauge Handmade Undermount Single Bowl Stainless Steel Bar/Prep Sink
+sink_w=14.5;
+sink_d=18.5;
+sink_h=9;
+
+//https://www.amazon.com/VAPSINT-Recommended-Stainless-Brushed-Sprayer/dp/B01N6RR1HY/ref=sr_1_6?s=hi&ie=UTF8&qid=1528740184&sr=1-6&keywords=faucet++Pull+Down+Sprayer
+//VAPSINT Well Recommended Stainless Steel Spring Brushed Nickel Mixer Pre Rinse Pull Down Sprayer Single Handle Kitchen Faucet, Pull Out Kitchen Sink Faucet
+
+
+/*sink_w=21;
+sink_d=18;
+sink_h=9;*/
+color("red") intersection() {
+    translate([ko+2,vw-kw+3,kh-10]) cube([sink_w,sink_d,sink_h]);
     hull();
 }
 //kitchen
@@ -311,4 +369,4 @@ color("grey",0.2) intersection() {
     translate([vl-57,0,-1]) cube([57+0.1,10,vh+2]); 
 }
 
-}
+//}
